@@ -14,11 +14,17 @@ notification_service_url = "http://localhost:8004"
 def index():
     return render_template("index.html")
 
+
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
+
 @app.route("/login", methods=["POST"])
 def login():
     # Realiza una solicitud al servicio de autenticación
     username = request.form["username"]
     password = request.form["password"]
+    #return redirect(url_for("dashboard"))
     response = requests.post(f"{authentication_service_url}/login", data={"username": username, "password": password})
     data = response.json()
 
